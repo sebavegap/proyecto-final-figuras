@@ -22,6 +22,8 @@ function App() {
 
 //proveemos el contexto con un estado donde guardaremos el inventario de figuras
 const [datosFiguras, setDatosFiguras] = useState([inventario]);
+//con console log revisamos que tenemos los datos del array
+console.log(datosFiguras);
 
 
   return (
