@@ -11,6 +11,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
+import Galeria from './pages/Galeria';
+import Detalle from './pages/Detalle';
 
 //import del contexto
 import MyContext from './Context';
@@ -18,7 +20,8 @@ import MyContext from './Context';
 //import del inventario de figuras desde la carpeta public como pseudo API
 import { inventario } from "./Inventario.js"
 
-
+//estilos de bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -39,6 +42,9 @@ console.log(datosFiguras);
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
+            <Route path="/galeria" element={<Galeria></Galeria>}></Route>
+            <Route path="/galeria/detalle/:id" element={<Detalle></Detalle>}></Route>
+            <Route path="*" element={<Home />} />
           </Routes>
         </BrowserRouter>
 
