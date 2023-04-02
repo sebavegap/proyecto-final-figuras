@@ -5,6 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: whitesmoke;
+
+  /* imagen de BG con las viñetas */
+  background-image: url(./assets/imgs/bg-figuras.png);
+  /* tamaño de la imagen */
+  background-size: cover;
+
 }
 
 code {
