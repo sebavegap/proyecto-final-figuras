@@ -1,11 +1,12 @@
 import React from 'react'
 
 //import de hooks de Bootstrap
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
 
 const Login = () => {
   return (
     <div>
+      <Container className='text-white'>
 <h1>Ingresa a tu cuenta</h1>
 
       <Form>
@@ -25,10 +26,11 @@ const Login = () => {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
       
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="success" type="submit">
         Ingresar
       </Button>
     </Form>
+    </Container>
     </div>
   )
 }
