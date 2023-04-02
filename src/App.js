@@ -1,6 +1,9 @@
 //import de hooks
 import { useState, useEffect } from 'react';
 
+//import de bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import de react-router-dom
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
