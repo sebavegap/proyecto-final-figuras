@@ -1,3 +1,4 @@
+//import react
 import React from 'react'
 
 //import de componentes de bootstrap
