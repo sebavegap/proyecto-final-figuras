@@ -28,14 +28,53 @@ function App() {
 
 //proveemos el contexto con un estado donde guardaremos el inventario de figuras
 const [datosFiguras, setDatosFiguras] = useState([inventario]);
+
+const [carrito, setCarrito] = useState([]);
+const [total, setTotal] = useState(0);
+
 //con console log revisamos que tenemos los datos del array
 console.log(datosFiguras);
 
+const agregarFigura = (figura) =>
+{
+  const index = carrito.findIndex((data) => data.id == figura.id);
+
+  if (index >= 0)
+  {
+    carrito[index].cantidad += 1;
+
+    setCarrito([...carrito]);
+  }
+  else
+  {
+    const seleccionada =
+    { 
+      id: figura.id,
+      name: figura.nombre,
+      price: figura.precio,
+      image: figura.imagen,
+      cantidad: 1
+    }
+
+    setCarrito([...carrito, seleccionada]);
+  }
+
+  setTotal(total + figura.precio);
+}
 
   return (
     <div className="App">
 
-      <MyContext.Provider value={{ datosFiguras, setDatosFiguras }}>
+      <MyContext.Provider value={
+        {
+          datosFiguras,
+          setDatosFiguras,
+          carrito,
+          setCarrito,
+          total,
+          setTotal,
+          agregarFigura
+        }}>
 
         <BrowserRouter>
           <Routes>

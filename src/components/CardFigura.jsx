@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Col, Card, ListGroup, Alert, Button } from 'react-bootstrap';
 
+import Context from '../Context';
+
 const CardFigura = ({ figura }) =>
 {
     const navigate = useNavigate();
+
+    const { agregarFigura } = useContext(Context);
 
     const verDetalle = () =>
     {
@@ -41,7 +45,8 @@ const CardFigura = ({ figura }) =>
                     </ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
-                    <Button variant="primary" onClick={() => verDetalle()}>Ver Más</Button>
+                    <Button variant="primary" onClick={() => verDetalle()} style={{ marginRight: '1em' }}>Ver Más</Button>
+                    <Button variant="success" onClick={() => agregarFigura(figura)} style={{ marginRight: '1em' }}>Agregar</Button>
                 </Card.Body>
             </Card>
         </Col>
