@@ -10,7 +10,7 @@ const Detalle = () =>
 {
     const { id } = useParams();
 
-    const { datosFiguras } = useContext(Context);
+    const { datosFiguras, agregarFigura } = useContext(Context);
 
     const figura = datosFiguras[0].filter((data) => data.id == id);
 
@@ -51,7 +51,8 @@ const Detalle = () =>
                                     Precio: ${figura[0].precio}
                             </Alert>
                             <hr style={{ marginBlock: '1em' }} />
-                            <Button variant="primary" onClick={() => volver()}>Volver</Button>
+                            <Button variant="primary" onClick={() => volver()} style={{ marginRight: '1em' }}>Volver</Button>
+                            <Button variant="success" onClick={() => agregarFigura(figura[0])} style={{ marginRight: '1em' }}>Agregar</Button>
                         </Card.Body>
                     </Col>
                 </Row>
