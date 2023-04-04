@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Registro from './pages/Registro';
 import Galeria from './pages/Galeria';
 import Detalle from './pages/Detalle';
+import Carrito from './pages/Carrito'
 
 //import del contexto
 import MyContext from './Context';
@@ -22,6 +23,7 @@ import { inventario } from "./Inventario.js"
 
 //estilos de bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Barra from './components/Barra';
 
 function App() {
 
@@ -77,12 +79,14 @@ const agregarFigura = (figura) =>
         }}>
 
         <BrowserRouter>
+        <Barra></Barra>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/galeria" element={<Galeria></Galeria>}></Route>
             <Route path="/galeria/detalle/:id" element={<Detalle></Detalle>}></Route>
+            <Route path="carrito" element={<Carrito></Carrito>}></Route>
             <Route path="*" element={<Home />} />
           </Routes>
         </BrowserRouter>
