@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 function Barra() {
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="black" variant="dark">
         <Container>
           <Navbar.Brand href="/">
             El.Coleccionista
@@ -16,7 +16,8 @@ function Barra() {
             <Nav.Link href="/galeria">En venta</Nav.Link>
           </Nav>
           <Nav>
-          <Nav.Link href="carrito" className="carrito" > 🛒$</Nav.Link>
+          <Nav.Link href="/favoritos">Favoritos</Nav.Link>
+          <Nav.Link href="/carrito" className="carrito" > 🛒$</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Container>
