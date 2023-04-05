@@ -1,8 +1,13 @@
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import MyContext from '../Context';
 
 function Barra() {
+
+  const { total } = useContext(MyContext);
+
   return (
     <>
       <Navbar bg="black" variant="dark">
@@ -17,7 +22,7 @@ function Barra() {
           </Nav>
           <Nav>
           <Nav.Link href="/favoritos">Favoritos</Nav.Link>
-          <Nav.Link href="/carrito" className="carrito" > 🛒$</Nav.Link>
+          <Nav.Link href="/carrito" className="carrito" > 🛒 $ {total}</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Container>

@@ -40,7 +40,7 @@ console.log(datosFiguras);
 
 const agregarFigura = (figura) =>
 {
-  const index = carrito.findIndex((data) => data.id == figura.id);
+  const index = carrito.findIndex((data) => data.id === figura.id);
 
   if (index >= 0)
   {
