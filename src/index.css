@@ -18,3 +18,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.backCarro {
+  background-color: rgb(255, 254, 241);
+  border-radius: 25px;
+}
