@@ -63,6 +63,10 @@ const agregarFigura = (figura) =>
   }
 
   setTotal(total + figura.precio);
+
+  const id = datosFiguras[0].findIndex((data) => data.id === figura.id);
+
+  datosFiguras[0][id].cantidad -= 1;
 }
 
   return (
