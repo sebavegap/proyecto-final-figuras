@@ -38,14 +38,14 @@ const CardFigura = ({ figura }) =>
                         minHeight: '6em'
                     }}>
                     <Card.Title>{figura.nombre}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">Linea: {figura.linea}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">📁 Linea: <span style={{ fontWeight: 700 }}>{figura.linea}</span></Card.Subtitle>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                     <ul style={{ marginBlock: '0.5em' }}>
-                        <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Estado: {figura.estado}</Card.Text>
+                        <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Estado: <span className="text-success" style={{ fontWeight: 700 }}>{figura.estado.toUpperCase()}</span></Card.Text>
                         {figura.cantidad > 0 ?
-                            <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Cantidad: <span className="text-success" style={{ fontWeight: 700 }}>{figura.cantidad}</span></Card.Text>
-                        : <Card.Text className='text-muted' style={{ fontWeight: 500, marginBlock: '0.5em' }}>❌ Cantidad: {figura.cantidad}</Card.Text>}
+                            <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Disponibles: <span className="text-success" style={{ fontWeight: 700 }}>{figura.cantidad}</span></Card.Text>
+                        : <Card.Text className='text-muted' style={{ fontWeight: 500, marginBlock: '0.5em' }}>❌ Disponibles: <span className="text-danger" style={{ fontWeight: 700 }}>{figura.cantidad}</span></Card.Text>}
                     </ul>
                     <ListGroup.Item>
                         <Alert key="dark" variant="dark"
