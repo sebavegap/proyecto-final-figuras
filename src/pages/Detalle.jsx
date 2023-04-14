@@ -23,13 +23,14 @@ const Detalle = () =>
 
     return (
         <Container style={{ marginBlock: '3em' }}>
-            <Card>
+            <Card border="dark" style={{ marginTop: '5em' }}>
                 <Row>
                     <Col>
                         <Card.Header
                             style={
                             {
                                 backgroundColor: '#FFFFFF',
+                                borderBottom: 'none',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -40,19 +41,52 @@ const Detalle = () =>
                         </Card.Header>
                     </Col>
                     <Col>
-                        <Card.Body>
+                        <Card.Body
+                            style={
+                            {
+                                backgroundColor: '#F8F9FA',
+                                minHeight: '6em'
+                            }}>
                             <Card.Title>{figura[0].nombre}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Linea: {figura[0].linea}</Card.Subtitle>
-                            <hr style={{ marginBlock: '1em' }} />
-                            <Card.Text>Estado: {figura[0].estado}</Card.Text>
-                            <Card.Text>Cantidad: {figura[0].cantidad}</Card.Text>
-                            <hr style={{ marginBlock: '1em' }} />
-                            <Alert key="primary" variant="primary" style={{ fontWeight: 700 }}>
-                                    Precio: ${figura[0].precio}
+                            <Card.Subtitle className="mb-2 text-muted">📂 Linea: <span style={{ fontWeight: 700 }}>{figura[0].linea}</span></Card.Subtitle>
+                        </Card.Body>
+                        <hr style={{ marginBlock: 0 }} />
+                        <Card.Body style={{ padding: '0.5em 0' }}>
+                            <ul style={{ marginBlock: '0.5em' }}>
+                                <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Estado: <span className="text-success" style={{ fontWeight: 700 }}>{figura[0].estado.toUpperCase()}</span></Card.Text>
+                                {figura[0].cantidad > 0 ?
+                                    <Card.Text style={{ fontWeight: 500, marginBlock: '0.5em' }}>✔️ Disponibles: <span className="text-success" style={{ fontWeight: 700 }}>{figura[0].cantidad}</span></Card.Text>
+                                : <Card.Text className='text-muted' style={{ fontWeight: 500, marginBlock: '0.5em' }}>❌ Disponibles: <span className="text-danger" style={{ fontWeight: 700 }}>{figura[0].cantidad}</span></Card.Text>}
+                            </ul>
+                            <Alert key="dark" variant="dark"
+                                style={
+                                {
+                                    color: '#198754',
+                                    backgroundColor: '#F8F9FA', 
+                                    fontWeight: 700,
+                                    margin: '1em'
+                                }}
+                            >
+                                <p
+                                    style={
+                                    {
+                                        fontSize: '1.5em',
+                                        fontWeight: 400,
+                                        display: 'flex',
+                                        justifyContent: 'start',
+                                        alignItems: 'center',
+                                        margin: 0
+                                    }}>🛈 <span style={{ fontSize: '0.75em', marginInline: '0.5em' }}>Información</span>
+                                </p>
+                                Precio: ${figura[0].precio}
                             </Alert>
-                            <hr style={{ marginBlock: '1em' }} />
+                        </Card.Body>
+                        <hr style={{ marginBlock: 0 }} />
+                        <Card.Body style={{ backgroundColor: '#F8F9FA' }}>
                             <Button variant="primary" onClick={() => volver()} style={{ marginRight: '1em' }}>Volver</Button>
-                            <Button variant="success" onClick={() => agregarFigura(figura[0])} style={{ marginRight: '1em' }}>Agregar</Button>
+                            {figura[0].cantidad > 0 ?
+                                <Button variant="success" onClick={() => agregarFigura(figura[0])} style={{ marginRight: '1em' }}>🛒 Agregar</Button>
+                            : <Button variant="success" style={{ marginRight: '1em' }} disabled>No Disponible</Button>}
                         </Card.Body>
                     </Col>
                 </Row>
