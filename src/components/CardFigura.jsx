@@ -10,11 +10,14 @@ const CardFigura = ({ figura }) =>
     const navigate = useNavigate();
 
     const { agregarFigura } = useContext(Context);
+    const { agregarFavorito } = useContext(Context);
 
     const verDetalle = () =>
     {
         navigate(`/galeria/detalle/${figura.id}`);
     }
+
+   
 
     return (
         <Col>
@@ -68,15 +71,22 @@ const CardFigura = ({ figura }) =>
                                     margin: 0
                                 }}>🛈 <span style={{ fontSize: '0.75em', marginInline: '0.5em' }}>Información</span>
                             </p>
-                            Precio: ${figura.precio}
+                            Precio: {
+                                //figura.precio con estilo de moneda chilena
+                                new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(figura.precio)
+                            }
                         </Alert>
                     </ListGroup.Item>
                 </ListGroup>
-                <Card.Body style={{ backgroundColor: '#F8F9FA' }}>
-                    <Button variant="primary" onClick={() => verDetalle()} style={{ marginRight: '1em' }}>🔍 Ver Más</Button>
+                <Card.Body style={{ backgroundColor: '#F8F9FA' }} 
+                /* alineamiento space-between de los botones */
+                className="d-flex justify-content-between">
+                    <Button variant="primary" onClick={() => verDetalle()} >🔍 Ver Más</Button>
                     {figura.cantidad > 0 ?
-                        <Button variant="success" onClick={() => agregarFigura(figura)} style={{ marginRight: '1em' }}>🛒 Agregar</Button>
-                    : <Button variant="success" style={{ marginRight: '1em' }} disabled>No Disponible</Button>}
+                        <Button variant="success" onClick={() => agregarFigura(figura)} >🛒 Agregar</Button>
+                    : <Button variant="success"  disabled>No Disponible</Button>}
+                    {/* Botón para agregar a favoritos */}
+                    <Button variant='danger' onClick={() => agregarFavorito(figura)}>❤️ Favorito</Button>
                 </Card.Body>
             </Card>
         </Col>
