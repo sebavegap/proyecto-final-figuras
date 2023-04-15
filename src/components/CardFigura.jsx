@@ -10,7 +10,7 @@ const CardFigura = ({ figura }) =>
     const navigate = useNavigate();
 
     const { agregarFigura } = useContext(Context);
-    const { agregarFavorito } = useContext(Context);
+    const { agregarFavorito, datosFavorito, setDatosFavorito } = useContext(Context);
 
     const verDetalle = () =>
     {
