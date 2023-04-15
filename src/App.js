@@ -34,7 +34,7 @@ const [datosFiguras, setDatosFiguras] = useState([inventario]);
 
 const [carrito, setCarrito] = useState([]);
 const [total, setTotal] = useState(0);
-const [datosFavoritos, setDatosFavoritos] = useState(['']);
+const [datosFavoritos, setDatosFavoritos] = useState([]);
 
 //con console log revisamos que tenemos los datos del array
 console.log(datosFiguras);
@@ -71,15 +71,18 @@ const agregarFigura = (figura) =>
 }
 
 //función para agregar a favoritos
-const agregarFavorito = (figura) =>
-{
+const agregarFavorito = (figura) => {
   const index = datosFavoritos.findIndex((data) => data.id === figura.id);
 
- //seteamos el estado de favoritos con el array de favoritos seleccionados
+  // Chequeo para saber si la figura ya está en favoritos
+  if (index === -1) {
+    // seteo de favoritos con el nuevo objeto
+    setDatosFavoritos([...datosFavoritos, figura]);
+  }
 
- setDatosFavoritos([...datosFavoritos, figura]);
- console.log(datosFavoritos);
-}
+  console.log(datosFavoritos);
+};
+
 
 
 
