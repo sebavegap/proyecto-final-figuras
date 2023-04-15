@@ -34,7 +34,7 @@ const [datosFiguras, setDatosFiguras] = useState([inventario]);
 
 const [carrito, setCarrito] = useState([]);
 const [total, setTotal] = useState(0);
-const [favoritos, setFavoritos] = useState([]);
+const [datosFavoritos, setDatosFavoritos] = useState(['']);
 
 //con console log revisamos que tenemos los datos del array
 console.log(datosFiguras);
@@ -73,31 +73,14 @@ const agregarFigura = (figura) =>
 //función para agregar a favoritos
 const agregarFavorito = (figura) =>
 {
-  const index = favoritos.findIndex((data) => data.id === figura.id);
+  const index = datosFavoritos.findIndex((data) => data.id === figura.id);
 
-  if (index >= 0)
-  {
-    favoritos[index].cantidad += 1;
+ //seteamos el estado de favoritos con el array de favoritos seleccionados
 
-    setFavoritos([...favoritos]);
-
-  }
-  else
-  {
-    const seleccionada =
-    {
-      id: figura.id,
-      name: figura.nombre,
-      price: figura.precio,
-      image: figura.imagen,
-      cantidad: 1
-    }
-
-    setFavoritos([...favoritos, seleccionada]);
-  }
-
- 
+ setDatosFavoritos([...datosFavoritos, figura]);
+ console.log(datosFavoritos);
 }
+
 
 
   return (
@@ -113,8 +96,8 @@ const agregarFavorito = (figura) =>
           setTotal,
           agregarFigura,
           agregarFavorito,
-          favoritos,
-          setFavoritos
+          datosFavoritos,
+          setDatosFavoritos
         }}>
 
         <BrowserRouter>
