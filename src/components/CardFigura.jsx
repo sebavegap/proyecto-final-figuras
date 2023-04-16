@@ -10,7 +10,7 @@ const CardFigura = ({ figura }) =>
     const navigate = useNavigate();
 
     const { agregarFigura } = useContext(Context);
-    const { agregarFavorito, datosFavorito, setDatosFavorito } = useContext(Context);
+    const { agregarFavoritos, datosFavoritos, setDatosFavoritos } = useContext(Context);
 
     const verDetalle = () =>
     {
@@ -85,8 +85,13 @@ const CardFigura = ({ figura }) =>
                     {figura.cantidad > 0 ?
                         <Button variant="success" onClick={() => agregarFigura(figura)} >🛒 Agregar</Button>
                     : <Button variant="success"  disabled>No Disponible</Button>}
-                    {/* Botón para agregar a favoritos */}
-                    <Button variant='danger' onClick={() => agregarFavorito(figura)}>❤️ Favorito</Button>
+                  {/* Botón para agregar a favoritos */}
+{
+    datosFavoritos.some((fav) => fav.id === figura.id)
+        ? <Button variant='danger' onClick={() => setDatosFavoritos(datosFavoritos.filter((fav) => fav.id !== figura.id))}>💔 Quitar favorito</Button>
+        : <Button variant='danger' onClick={() => agregarFavoritos(figura)}>❤️ Añadir favorito</Button>
+}
+
                 </Card.Body>
             </Card>
         </Col>
