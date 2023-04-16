@@ -71,7 +71,7 @@ const agregarFigura = (figura) =>
 }
 
 //función para agregar a favoritos
-const agregarFavorito = (figura) => {
+const agregarFavoritos = (figura) => {
   const index = datosFavoritos.findIndex((data) => data.id === figura.id);
 
   // Chequeo para saber si la figura ya está en favoritos
@@ -98,7 +98,7 @@ const agregarFavorito = (figura) => {
           total,
           setTotal,
           agregarFigura,
-          agregarFavorito,
+          agregarFavoritos,
           datosFavoritos,
           setDatosFavoritos
         }}>
