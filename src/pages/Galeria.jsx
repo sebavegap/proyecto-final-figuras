@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 
-import { Container, Row, ButtonGroup, Button, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Container, Row, ButtonGroup, Button, Col, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
+
 
 import CardFigura from '../components/CardFigura';
 
@@ -19,7 +20,7 @@ const Galeria = () => {
     //filtramos el array de figuras con el metodo filter, y le pasamos la condición para filtrar
     //la variable filtradas va a contener el nuevo array de figuras filtradas
     const filtradas = datosFiguras[0].filter((data) =>
-    //la condición va a buscar que la linea de la figura incluya la categoria que le pasamos por parametro
+      //la condición va a buscar que la linea de la figura incluya la categoria que le pasamos por parametro
       data.linea.toLowerCase().includes(categoria.toLowerCase())
     );
     //finalmente seteamos el estado con el nuevo array de figuras filtradas
@@ -30,15 +31,29 @@ const Galeria = () => {
     //reiniciamos el estado con todas las figuras seteando el estado con el array de datosFiguras
     setFigurasFiltradas(datosFiguras[0]);
   };
-//funcion para capturar el valor del input y actualizar el estado
+  //funcion para capturar el valor del input y actualizar el estado
   const actualizarBusqueda = (event) => {
     setBusqueda(event.target.value);
   };
-//filtro de las figuras previamente filtradas por los botones
-//Ahora usamos filter para generar un nuevo array con la figuras que incluyan el nombre que el usuario esté escribiendo en el input
+  //filtro de las figuras previamente filtradas por los botones
+  //Ahora usamos filter para generar un nuevo array con la figuras que incluyan el nombre que el usuario esté escribiendo en el input
   const figurasAMostrar = figurasFiltradas.filter((figura) =>
     figura.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
+
+  //funcion para ordenar las figuras por precio, ascendete o descendente
+  const ordenarFiguras = (orden) => {
+    const figurasOrdenadas = [...figurasFiltradas].sort((a, b) => {
+      if (orden === 'asc') {
+        return a.precio - b.precio;
+      } else {
+        return b.precio - a.precio;
+      }
+    });
+
+    setFigurasFiltradas(figurasOrdenadas);
+  };
+
 
   return (
     <Container style={{ marginBlock: '5em' }}>
@@ -59,7 +74,22 @@ const Galeria = () => {
           </ButtonGroup>
         </Col>
         <Col xs={12} md={6} className='mt-2'>
-            {/* input para filtrar las figuras por nombre, dentro de la selección con los botones */}
+
+          {/* input para filtrar las figuras por nombre, dentro de la selección con los botones */}
+
+          <DropdownButton
+            id="dropdown-ordenar"
+            title="Ordenar"
+            variant="secondary"
+            className="me-2"
+          >
+            <Dropdown.Item onClick={() => ordenarFiguras('asc')}>
+              Precio ascendente
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => ordenarFiguras('desc')}>
+              Precio descendente
+            </Dropdown.Item>
+          </DropdownButton>
           <InputGroup>
             <InputGroup.Text>Buscar</InputGroup.Text>
             <FormControl
@@ -69,6 +99,7 @@ const Galeria = () => {
             />
           </InputGroup>
         </Col>
+
       </Row>
       <Row xs="1" md="2" lg="3" xl="3" style={{ marginTop: '1em' }}>
         {figurasAMostrar.map((data) => {
