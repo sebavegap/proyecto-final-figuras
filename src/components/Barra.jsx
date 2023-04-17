@@ -3,10 +3,26 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+//import de componentes para la navegación
+import { useNavigate } from 'react-router-dom'
+
 import MyContext from '../Context';
 
 function Barra() {
-  const { total } = useContext(MyContext);
+  const { conectado, setConectado, user, total } = useContext(MyContext);
+
+  //creamos la variable navigate para volver al Home
+  const navigate = useNavigate();
+
+  const cerrarSesion = () =>
+  {
+      //funcion para cerrar la sesión
+      setConectado(false);
+
+      //un segundo de espera
+      setTimeout(() => navigate('/'), 1000);
+  }
 
   return (
     <>
@@ -27,25 +43,41 @@ function Barra() {
         }}
       >
         <Container>
+          {!conectado ?
           <Navbar.Brand as={Link} to="/" style={{ fontWeight: 700 }}>
             El.Coleccionista
-          </Navbar.Brand>
+          </Navbar.Brand> :
+          <Navbar.Brand as={Link} to="/galeria" style={{ fontWeight: 700 }}>
+            El.Coleccionista
+          </Navbar.Brand>}
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto,auto">
-              <Nav.Link as={Link} to="/" style={{ fontWeight: 500 }}>
-                Home
-              </Nav.Link>
+              {!conectado &&
+                <Nav.Link as={Link} to="/" style={{ fontWeight: 500 }}>
+                  Home
+                </Nav.Link>}
+              {conectado && user.admin &&
+              <Nav.Link as={Link} to="/producto" style={{ fontWeight: 500 }}>
+                Producto nuevo
+              </Nav.Link>}
+              {conectado &&
               <Nav.Link as={Link} to="/galeria" style={{ fontWeight: 500 }}>
                 En venta
-              </Nav.Link>
+              </Nav.Link>}
             </Nav>
             <Nav>
+              {conectado &&
               <Nav.Link as={Link} to="/favoritos" style={{ fontWeight: 500 }}>
                 Favoritos
-              </Nav.Link>
+              </Nav.Link>}
+              {conectado &&
               <Nav.Link as={Link} to="/carrito" className="carrito" style={{ fontWeight: 500 }}>
                 🛒 $ {total}
-              </Nav.Link>
+              </Nav.Link>}
+              {conectado &&
+                <Nav.Link as={Link} to="/" onClick={() => cerrarSesion()} style={{ fontWeight: 500 }}>
+                  Salir
+                </Nav.Link>}
             </Nav>
           </Navbar.Collapse>
         </Container>

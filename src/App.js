@@ -28,6 +28,9 @@ import Barra from './components/Barra';
 
 function App() {
 
+//validar la conexión del usuario
+const [conectado, setConectado] = useState(false);
+const [user, setUser] = useState({});
 
 //proveemos el contexto con un estado donde guardaremos el inventario de figuras
 const [datosFiguras, setDatosFiguras] = useState([inventario]);
@@ -39,10 +42,27 @@ const [datosFavoritos, setDatosFavoritos] = useState([]);
 //con console log revisamos que tenemos los datos del array
 console.log(datosFiguras);
 
+//array de usuarios registrados
+const usuarios =
+[
+  {
+    email: "admin@coleccionista.cl",
+    password: "1234",
+    admin: true
+  },
+  {
+    email: "usuario@coleccionista.cl",
+    password: "1234",
+    admin: false
+  }
+]
+
+//función para agregar productos al carrito
 const agregarFigura = (figura) =>
 {
   const index = carrito.findIndex((data) => data.id === figura.id);
 
+  //si ya existe el producto se suma una cantidad sino se agrega un producto nuevo
   if (index >= 0)
   {
     carrito[index].cantidad += 1;
@@ -60,11 +80,14 @@ const agregarFigura = (figura) =>
       cantidad: 1
     }
 
+    //se actualiza el array del carrito
     setCarrito([...carrito, seleccionada]);
   }
 
+  //se actualiza el precio total
   setTotal(total + figura.precio);
 
+  //se disminuye la cantidad disponible de productos
   const id = datosFiguras[0].findIndex((data) => data.id === figura.id);
 
   datosFiguras[0][id].cantidad -= 1;
@@ -91,6 +114,11 @@ const agregarFavoritos = (figura) => {
 
       <MyContext.Provider value={
         {
+          conectado,
+          setConectado,
+          user,
+          setUser,
+          usuarios,
           datosFiguras,
           setDatosFiguras,
           carrito,
@@ -106,14 +134,23 @@ const agregarFavoritos = (figura) => {
         <BrowserRouter>
         <Barra></Barra>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registro" element={<Registro />} />
-            <Route path="/galeria" element={<Galeria></Galeria>}></Route>
-            <Route path="/galeria/detalle/:id" element={<Detalle></Detalle>}></Route>
-            <Route path="/carrito" element={<Carrito></Carrito>}></Route>
-            <Route path="/favoritos" element={<Favoritos></Favoritos>}></Route>
-            <Route path="*" element={<Home />} />
+            {!conectado &&
+              <>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registro" element={<Registro />} />
+              </>}
+            {conectado && user.admin && <Route path="/producto" element={<Galeria></Galeria>} />}
+            {conectado &&
+              <>
+                <Route path="/" element={<Galeria></Galeria>} />
+                <Route path="/galeria" element={<Galeria></Galeria>} />
+                <Route path="/galeria/detalle/:id" element={<Detalle></Detalle>} />
+                <Route path="/carrito" element={<Carrito></Carrito>} />
+                <Route path="/favoritos" element={<Favoritos></Favoritos>} />
+                <Route path="/ajustes" element={<Favoritos></Favoritos>} />
+              </>}
+            {!conectado ? <Route path="*" element={<Home />} /> : <Route path="/galeria" element={<Galeria></Galeria>} />}
           </Routes>
         </BrowserRouter>
 
