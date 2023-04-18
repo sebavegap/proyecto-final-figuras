@@ -19,6 +19,12 @@ code {
     monospace;
 }
 .backCarro {
-  background-color: rgb(255, 254, 241);
+  
   border-radius: 25px;
+}
+
+.carroPage {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
