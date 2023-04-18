@@ -57,7 +57,7 @@ function Barra() {
                   Home
                 </Nav.Link>}
               {conectado && user.admin &&
-              <Nav.Link as={Link} to="/producto" style={{ fontWeight: 500 }}>
+              <Nav.Link as={Link} to="/figura" style={{ fontWeight: 500 }}>
                 Producto nuevo
               </Nav.Link>}
               {conectado &&
