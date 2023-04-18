@@ -11,6 +11,8 @@ body {
   background-image: url(./assets/imgs/bg-figuras.png);
   /* tamaño de la imagen */
   background-size: cover;
+  /* posicion de la imagen */
+  background-attachment: fixed;
 
 }
 
