@@ -16,6 +16,7 @@ import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito'
 import Favoritos from './pages/Favoritos';
 import Usuario from './pages/Usuario';
+import Figura from './pages/Figura';
 
 //import del contexto
 import MyContext from './Context';
@@ -146,7 +147,7 @@ const agregarFavoritos = (figura) => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
               </>}
-            {conectado && user.admin && <Route path="/figura" element={<Galeria></Galeria>} />}
+            {conectado && user.admin && <Route path="/figura" element={<Figura></Figura>} />}
             {conectado &&
               <>
                 <Route path="/" element={<Galeria></Galeria>} />
