@@ -31,7 +31,8 @@ const Home = () => {
 
       <Container fluid className='d-flex align-items-center justify-content-center w-auto h-100' style={{ minHeight: '100vh' }}>
 
-        <Container className='text-white '>
+        <Container className='text-white bg-dark bg-opacity-50 p-3 rounded'>
+        
 
 
           <Row className='py-5'>

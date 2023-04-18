@@ -67,7 +67,7 @@ const registrarUsuario = () =>
   return (
     <div>
      <Container fluid className='d-flex align-items-center justify-content-center w-auto h-100 text-white' style={{ minHeight: '100vh' }}>
-<Container>
+     <Container className="bg-dark bg-opacity-50 p-3 rounded">
   
 
         
