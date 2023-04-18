@@ -22,9 +22,6 @@ const Figura = () => {
                 <label className='mt-3' for="image">Selecciona una imagen</label><br />
                 <input className='m-2 pb-3' type="file" name="image" />
 
-
-
-
                 <Button variant='primary'>Envia tu producto</Button>
             </form>
         </Container>

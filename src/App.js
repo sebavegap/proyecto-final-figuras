@@ -147,7 +147,7 @@ const agregarFavoritos = (figura) => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
               </>}
-            {conectado && user.admin && <Route path="/figura" element={<Figura></Figura>}/>}
+            {conectado && user.admin && <Route path="/figura" element={<Figura></Figura>} />}
             {conectado &&
               <>
                 <Route path="/" element={<Galeria></Galeria>} />
