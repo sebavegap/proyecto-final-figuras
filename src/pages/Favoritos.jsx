@@ -14,7 +14,8 @@ const Favoritos = () => {
   console.log(datosFavoritos);
 
   return (
-    <Container style={{ marginBlock: '4em' }} className="text-white">
+    <Container style={{ marginBlock: '5em' }} className="text-white">
+      <Container className="bg-dark bg-opacity-50 p-3 rounded">
       <Row>
         <Col>
           <h1>Favoritos</h1>
@@ -25,6 +26,7 @@ const Favoritos = () => {
           <CardFigura key={favorito.id} figura={favorito} />
         ))}
       </Row>
+      </Container>
     </Container>
   );
 };

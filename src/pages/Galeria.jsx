@@ -57,6 +57,8 @@ const Galeria = () => {
 
   return (
     <Container style={{ marginBlock: '5em' }}>
+      {/* pequeño container gris transparente, bordes redondeados */}
+      <Container className="bg-dark bg-opacity-50 p-3 rounded">
       <h1 className='text-white justify-content-start pb-3'>Galería de Figuras</h1>
       <Row className="align-items-end">
         <Col xs={12} md={6}>
@@ -106,6 +108,7 @@ const Galeria = () => {
           return <CardFigura key={data.id} figura={data} />;
         })}
       </Row>
+      </Container>
     </Container>
   );
 };
