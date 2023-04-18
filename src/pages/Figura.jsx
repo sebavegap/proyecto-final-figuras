@@ -31,4 +31,4 @@ const Figura = () => {
     )
 }
 
-export default Figura
+export default Figura;
