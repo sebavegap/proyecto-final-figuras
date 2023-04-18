@@ -10,7 +10,7 @@ import MyContext from '../Context'
 
 const Login = () => {
   //datos del inicio de sesión
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const { setConectado, setUser, usuarios } = useContext(MyContext);
@@ -21,13 +21,16 @@ const Login = () => {
   //función para autenticar a un usuario registrado
   const validarUsuario = () =>
   {
-    const usuario = usuarios.find((usuario) => usuario.email === email && usuario.password === password);
+    const usuario = usuarios.find((usuario) => (usuario.usuario === login.toUpperCase() || usuario.email === login) && usuario.password === password);
 
-    if (email && password)
+    if (login && password)
     {
       if (usuario)
       {
         //manipulando el DOM
+        document.getElementById('emailLogin').disabled = true;
+        document.getElementById('passwordLogin').disabled = true;
+
         const login = document.getElementById('loginUsuario');
 
         login.innerText = 'Ingresando...';
@@ -38,7 +41,15 @@ const Login = () => {
         {
           setConectado(true);
 
-          setUser({email: usuario.email, password: usuario.password, admin: usuario.admin})
+          //datos del usuario
+          setUser(
+          {
+            id: usuario.id,
+            usuario: usuario.usuario,
+            email: usuario.email,
+            password: usuario.password,
+            admin: usuario.admin
+          });
 
           //funcion para navegar al catalogo
           navigate('/galeria');
@@ -48,15 +59,13 @@ const Login = () => {
       {
         setConectado(false);
 
-        alert('Usuario inválido');
+        alert('Datos no válidos');
       }
     }
     else
     {
-      alert('Los campos son obligatorios');
+      alert('Todos los campos son obligatorios');
     }
-
-    console.log(usuario)
   }
 
   return (
@@ -78,11 +87,10 @@ const Login = () => {
       <Form>
       <Row>
             <Col className='d-flex justify-content-center'>
-      <Form.Group className="mb-3" controlId="formBasicUsername">
+      <Form.Group className="mb-3">
         <Form.Label>Usuario</Form.Label>
-        <Form.Control type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" autoComplete="off" />
-        <Form.Text className="text-muted">
-        </Form.Text>
+        <Form.Control type="email" id="emailLogin" onChange={(e) => setLogin(e.target.value)} placeholder="Tu usuario o tu email" autoComplete="off" />
+
       </Form.Group>
       </Col>
       </Row>
@@ -92,9 +100,9 @@ const Login = () => {
 
       <Row>
             <Col className='d-flex justify-content-center'>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" autoComplete="off" />
+        <Form.Control type="password" id="passwordLogin" onChange={(e) => setPassword(e.target.value)} placeholder="********" autoComplete="off" />
       </Form.Group>
       </Col>
       </Row>
