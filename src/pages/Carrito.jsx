@@ -41,7 +41,7 @@ const Carrito = () => {
 
     <div className='carroPage p-5'>
       <div className='backCarro bg-light w-75 m-autu p-5'>
-        <h3>Tu carro :</h3>
+        <h3>Tu carro : </h3>
 
 
 
