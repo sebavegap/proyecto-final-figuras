@@ -15,7 +15,7 @@ import Galeria from './pages/Galeria';
 import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito'
 import Favoritos from './pages/Favoritos';
-import Figura from './pages/Figura';
+import Usuario from './pages/Usuario';
 
 //import del contexto
 import MyContext from './Context';
@@ -33,6 +33,25 @@ function App() {
 const [conectado, setConectado] = useState(false);
 const [user, setUser] = useState({});
 
+//array de usuarios registrados
+const [usuarios, setUsuarios] = useState(
+[
+  {
+    id: 1,
+    usuario: "ADMIN",
+    email: "admin@coleccionista.cl",
+    password: "1234",
+    admin: true
+  },
+  {
+    id: 2,
+    usuario: "USUARIO",
+    email: "usuario@coleccionista.cl",
+    password: "1234",
+    admin: false
+  }
+]);
+
 //proveemos el contexto con un estado donde guardaremos el inventario de figuras
 const [datosFiguras, setDatosFiguras] = useState([inventario]);
 
@@ -42,21 +61,6 @@ const [datosFavoritos, setDatosFavoritos] = useState([]);
 
 //con console log revisamos que tenemos los datos del array
 console.log(datosFiguras);
-
-//array de usuarios registrados
-const usuarios =
-[
-  {
-    email: "admin@coleccionista.cl",
-    password: "1234",
-    admin: true
-  },
-  {
-    email: "usuario@coleccionista.cl",
-    password: "1234",
-    admin: false
-  }
-]
 
 //función para agregar productos al carrito
 const agregarFigura = (figura) =>
@@ -120,6 +124,7 @@ const agregarFavoritos = (figura) => {
           user,
           setUser,
           usuarios,
+          setUsuarios,
           datosFiguras,
           setDatosFiguras,
           carrito,
@@ -141,7 +146,7 @@ const agregarFavoritos = (figura) => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
               </>}
-            {conectado && user.admin && <Route path="/producto" element={<Galeria></Galeria>} />}
+            {conectado && user.admin && <Route path="/figura" element={<Galeria></Galeria>} />}
             {conectado &&
               <>
                 <Route path="/" element={<Galeria></Galeria>} />
@@ -149,8 +154,7 @@ const agregarFavoritos = (figura) => {
                 <Route path="/galeria/detalle/:id" element={<Detalle></Detalle>} />
                 <Route path="/carrito" element={<Carrito></Carrito>} />
                 <Route path="/favoritos" element={<Favoritos></Favoritos>} />
-                <Route path="/ajustes" element={<Favoritos></Favoritos>} />
-                <Route path="/figura" element={<Figura></Figura>} />
+                <Route path="/usuario" element={<Usuario></Usuario>} />
               </>}
             {!conectado ? <Route path="*" element={<Home />} /> : <Route path="/galeria" element={<Galeria></Galeria>} />}
           </Routes>

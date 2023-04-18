@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import MyContext from '../Context';
 
 function Barra() {
-  const { conectado, setConectado, user, total } = useContext(MyContext);
+  const { conectado, setConectado, user, setUser, setCarrito, total, setTotal, setDatosFavoritos } = useContext(MyContext);
 
   //creamos la variable navigate para volver al Home
   const navigate = useNavigate();
@@ -19,6 +19,12 @@ function Barra() {
   {
       //funcion para cerrar la sesión
       setConectado(false);
+
+      //se reinician los estados
+      setUser({});
+      setCarrito([]);
+      setTotal(0);
+      setDatosFavoritos([]);
 
       //un segundo de espera
       setTimeout(() => navigate('/'), 1000);
@@ -51,33 +57,38 @@ function Barra() {
             El.Coleccionista
           </Navbar.Brand>}
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-            <Nav className="me-auto,auto">
+            <Nav style={{ marginInline: '1em' }}>
               {!conectado &&
                 <Nav.Link as={Link} to="/" style={{ fontWeight: 500 }}>
                   Home
                 </Nav.Link>}
               {conectado && user.admin &&
               <Nav.Link as={Link} to="/figura" style={{ fontWeight: 500 }}>
-                Producto nuevo
+                📋 Agregar
               </Nav.Link>}
               {conectado &&
-              <Nav.Link as={Link} to="/galeria" style={{ fontWeight: 500 }}>
-                En venta
-              </Nav.Link>}
+                <>
+                  <Nav.Link as={Link} to="/galeria" style={{ fontWeight: 500 }}>
+                    En venta
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/favoritos" style={{ fontWeight: 500 }}>
+                    Favoritos
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/carrito" className="carrito" style={{ fontWeight: 500 }}>
+                    🛒 $ {total}
+                  </Nav.Link>
+                </>}
             </Nav>
-            <Nav>
+            <Nav style={{ marginInline: '1em' }}>
               {conectado &&
-              <Nav.Link as={Link} to="/favoritos" style={{ fontWeight: 500 }}>
-                Favoritos
-              </Nav.Link>}
-              {conectado &&
-              <Nav.Link as={Link} to="/carrito" className="carrito" style={{ fontWeight: 500 }}>
-                🛒 $ {total}
-              </Nav.Link>}
-              {conectado &&
-                <Nav.Link as={Link} to="/" onClick={() => cerrarSesion()} style={{ fontWeight: 500 }}>
-                  Salir
-                </Nav.Link>}
+                <>
+                  <Nav.Link as={Link} to="/usuario" style={{ fontWeight: 500 }}>
+                    📝 {user.usuario}
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/" onClick={() => cerrarSesion()} style={{ fontWeight: 500 }}>
+                    Salir
+                  </Nav.Link>
+                </>}
             </Nav>
           </Navbar.Collapse>
         </Container>
