@@ -2,6 +2,9 @@ import { useContext, useState } from 'react';
 
 import { Container, Row, ButtonGroup, Button, Col, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
 
+//import de imagenes para botones Disney+
+import MarvelLogo from '../assets/imgs/marvel-logo.png';
+import StarWarsLogo from '../assets/imgs/starwars-logo.png';
 
 import CardFigura from '../components/CardFigura';
 
@@ -57,57 +60,78 @@ const Galeria = () => {
 
   return (
     <Container style={{ marginBlock: '5em' }}>
-      {/* pequeño container gris transparente, bordes redondeados */}
       <Container className="bg-dark bg-opacity-50 p-3 rounded">
-      <h1 className='text-white justify-content-start pb-3'>Galería de Figuras</h1>
-      <Row className="align-items-end">
-        <Col xs={12} md={6}>
-          <ButtonGroup>
-            {/* los botones llaman a la función filtrarFiguras y le entregan el parametro que necesitan */}
-            <Button variant="danger" onClick={() => filtrarFiguras('marvel')}>
-              Marvel
-            </Button>
-            <Button variant="dark" onClick={() => filtrarFiguras('star wars')}>
-              Star Wars
-            </Button>
-            <Button variant="outline-secondary" onClick={reiniciarFiltro}>
-              Todas las figuras
-            </Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs={12} md={6} className='mt-2'>
+        <h1 className='text-white justify-content-start pb-3'>Galería de Figuras</h1>
+        <Row className="align-items-end">
+          <Col xs={12} md={6}>
+            <ButtonGroup>
+              {/* los botones llaman a la función filtrarFiguras y le entregan el parametro que necesitan */}
+              <Button
+                variant="danger"
+                onClick={() => filtrarFiguras('marvel')}
+                style={{
+                  /* la forma de url llama a la imagen que importamos arriba */
+                  backgroundImage: `url(${MarvelLogo})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  color: 'transparent',
+                }}
+              >
+                Marvel
+              </Button>
+              <Button
+                variant="dark"
+                className='p-1'
+                onClick={() => filtrarFiguras('star wars')}
+                style={{
+                  backgroundImage: `url(${StarWarsLogo})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  color: 'transparent',
+                }}
+              >
+                Star Wars
+              </Button>
+              <Button variant="outline-secondary" onClick={reiniciarFiltro}>
+                Todas las figuras
+              </Button>
+            </ButtonGroup>
+          </Col>
+          <Col xs={12} md={6} className='mt-2'>
 
-          {/* input para filtrar las figuras por nombre, dentro de la selección con los botones */}
+            {/* input para filtrar las figuras por nombre, dentro de la selección con los botones */}
 
-          <DropdownButton
-            id="dropdown-ordenar"
-            title="Ordenar"
-            variant="secondary"
-            className="me-2"
-          >
-            <Dropdown.Item onClick={() => ordenarFiguras('asc')}>
-              Precio ascendente
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => ordenarFiguras('desc')}>
-              Precio descendente
-            </Dropdown.Item>
-          </DropdownButton>
-          <InputGroup>
-            <InputGroup.Text>Buscar</InputGroup.Text>
-            <FormControl
-              placeholder="Nombre de figura"
-              onChange={actualizarBusqueda}
-              value={busqueda}
-            />
-          </InputGroup>
-        </Col>
+            <DropdownButton
+              id="dropdown-ordenar"
+              title="Ordenar"
+              variant="secondary"
+              className="me-2"
+            >
+              <Dropdown.Item onClick={() => ordenarFiguras('asc')}>
+                Precio ascendente
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => ordenarFiguras('desc')}>
+                Precio descendente
+              </Dropdown.Item>
+            </DropdownButton>
+            <InputGroup>
+              <InputGroup.Text>Buscar</InputGroup.Text>
+              <FormControl
+                placeholder="Nombre de figura"
+                onChange={actualizarBusqueda}
+                value={busqueda}
+              />
+            </InputGroup>
+          </Col>
 
-      </Row>
-      <Row xs="1" md="2" lg="3" xl="3" style={{ marginTop: '1em' }}>
-        {figurasAMostrar.map((data) => {
-          return <CardFigura key={data.id} figura={data} />;
-        })}
-      </Row>
+        </Row>
+        <Row xs="1" md="2" lg="3" xl="3" style={{ marginTop: '1em' }}>
+          {figurasAMostrar.map((data) => {
+            return <CardFigura key={data.id} figura={data} />;
+          })}
+        </Row>
       </Container>
     </Container>
   );
