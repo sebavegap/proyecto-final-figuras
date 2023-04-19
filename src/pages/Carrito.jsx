@@ -74,9 +74,9 @@ const Carrito = () => {
                   $ {(figura.price * figura.cantidad)}
                 </h6>
                 <div className='w-50 text-center'>
-                  <Button variant='danger' onClick={() => disminuirCantidad(figura.id)}>-</Button>
+                  <Button variant='danger' style={{padding:"0 10px 0 10px"}} onClick={() => disminuirCantidad(figura.id)}>-</Button>
                   <strong className='px-1'> {figura.cantidad} </strong>
-                  <Button variant='primary' onClick={() => aumentarCantidad(figura.id)}>+</Button>
+                  <Button variant='success' style={{padding:"0 10px 0 10px"}} onClick={() => aumentarCantidad(figura.id)}>+</Button>
                 </div>
               </div>
             </div>
