@@ -4,7 +4,7 @@ import { Button, Container } from 'react-bootstrap'
 const Figura = () => {
 
     return (
-        <Container className='pageFigura w-25 p-5'>
+        <Container className='pageFigura bg-dark bg-opacity-50 w-25 p-5'>
             <h2>Agrega un producto</h2>
             <form>
 
