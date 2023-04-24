@@ -81,15 +81,15 @@ const CardFigura = ({ figura }) =>
                 <Card.Body style={{ backgroundColor: '#F8F9FA' }} 
                 /* alineamiento space-between de los botones */
                 className="d-flex justify-content-between">
-                    <Button variant="primary" onClick={() => verDetalle()} >🔍 Ver</Button>
+                    <Button variant="primary" onClick={() => verDetalle()} >🔍 Ver Más</Button>
                     {figura.cantidad > 0 ?
                         <Button variant="success" onClick={() => agregarFigura(figura)} style={{ marginInline: '0.5em' }} >🛒 Agregar</Button>
                     : <Button variant="success" style={{ marginInline: '0.5em' }} disabled>No Disponible</Button>}
                   {/* Botón para agregar a favoritos */}
 {
     datosFavoritos.some((fav) => fav.id === figura.id)
-        ? <Button variant='danger' onClick={() => setDatosFavoritos(datosFavoritos.filter((fav) => fav.id !== figura.id))}>💔 Quitar</Button>
-        : <Button variant='danger' onClick={() => agregarFavoritos(figura)}>❤️ Favorito</Button>
+        ? <Button variant='danger' onClick={() => setDatosFavoritos(datosFavoritos.filter((fav) => fav.id !== figura.id))}>💔 Quitar favorito</Button>
+        : <Button variant='danger' onClick={() => agregarFavoritos(figura)}>❤️ Añadir favorito</Button>
 }
 
                 </Card.Body>
