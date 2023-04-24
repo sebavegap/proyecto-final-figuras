@@ -45,8 +45,8 @@ const Figura = () => {
                     nombre: nombre,
                     linea: lineaFigura,
                     estado: "Nuevo, con caja",
-                    cantidad: cantidad,
-                    precio: precio,
+                    cantidad: parseInt(cantidad),
+                    precio: parseInt(precio),
                     imagen: imagen,
                 }
 
