@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
+import { Form, Button, Alert, Container, Col, Row } from 'react-bootstrap'
 
 //import de componentes para la navegación
 import { useNavigate } from 'react-router-dom'
@@ -31,17 +31,17 @@ const Figura = () => {
             document.getElementById('lineaDosRegistro').disabled = true;
             document.getElementById('cantidadRegistro').disabled = true;
         
-            const login = document.getElementById('registroFigura');
+            const registro = document.getElementById('registroFigura');
         
-            login.innerText = 'Registrando...';
-            login.disabled = true;
+            registro.innerText = 'Registrando...';
+            registro.disabled = true;
 
             //un segundo de espera
             setTimeout(() =>
             {
                 const figura =
                 {
-                    id: datosFiguras[0][datosFiguras[0].length - 1].id,
+                    id: datosFiguras[0][datosFiguras[0].length - 1].id + 1,
                     nombre: nombre,
                     linea: lineaFigura,
                     estado: "Nuevo, con caja",
@@ -53,7 +53,23 @@ const Figura = () => {
                 datosFiguras[0].push(figura);
 
                 //funcion para navegar al catalogo
-                navigate('/galeria');
+                navigate('/figura');
+
+                //manipulando el DOM
+                document.getElementById('nombreRegistro').disabled = false;
+                document.getElementById('precioRegistro').disabled = false;
+                document.getElementById('imagenRegistro').disabled = false;
+                document.getElementById('lineaUnoRegistro').disabled = false;
+                document.getElementById('lineaUnoRegistro').checked = false;
+                document.getElementById('lineaDosRegistro').disabled = false;
+                document.getElementById('lineaDosRegistro').checked = false;
+                document.getElementById('cantidadRegistro').disabled = false;
+
+                registro.innerText = 'Registrar';
+                registro.disabled = false;
+
+                document.getElementById('componenteAlert').style.display = '';
+                document.getElementById('parrafoAlert').innerText = `¡Figura ${nombre} registrada exitosamente!`;
             }, 1000);
         }
         else
@@ -63,28 +79,64 @@ const Figura = () => {
     }
 
     return (
-        <Container className='pageFigura bg-dark bg-opacity-50 w-25 p-5'>
-            <h2>Agrega un producto</h2>
-            <form>
-
-                <label className='mt-3'>Nombre del producto</label><br />
-                <input type="text" id="nombreRegistro" onChange={(e) => setNombre(e.target.value)} autoComplete="off" /><br />
-
-                <label className='mt-3'>Precio del producto</label><br />
-                <input type="number" id="precioRegistro" onChange={(e) => setPrecio(e.target.value)} autoComplete="off" /><br />
-
-                <label className='mt-3'>¿Cuantos productos son?</label><br />
-                <input type="number" id="cantidadRegistro" onChange={(e) => setCantidad(e.target.value)} autoComplete="off" /><br />
-
-                <label className='mt-3'>URL de la imagen</label><br />
-                <input type="text" id="imagenRegistro" onChange={(e) => setImagen(e.target.value)} autoComplete="off" /><br />
-
-                <label className='m-3'>Elige la linea de tu producto</label><br />
-                <input type="checkbox" id="lineaUnoRegistro" value="Star Wars: The Black Series" onChange={(e) => setLineaFigura(e.target.value)} /> Star Wars: The Black Series<br />
-                <input className='mb-4' type="checkbox" id="lineaDosRegistro" value="Marvel Legends" onChange={(e) => setLineaFigura(e.target.value)} /> Marvel Legends<br />
-
-                <Button type="button" variant="primary" id="registroFigura" onClick={() => registrarFigura()}>Registrar</Button>
-            </form>
+        <Container fluid className='d-flex align-items-center justify-content-center w-auto h-100 text-white' style={{ minHeight: '100vh' }}>
+            <Container className="bg-dark bg-opacity-50 p-3 rounded">
+                <Alert className="m-5 mb-0" id="componenteAlert" key="success" variant="success" style={{ marginBlock: '1em', paddingBlock: '1em', display: 'none' }}>
+                    <p id="parrafoAlert" style={{ margin: 0 }}></p>
+                </Alert>
+                <Row className='p-5 pb-3'>
+                    <Col className='d-flex justify-content-center'>
+                        <h1>Agrega un producto</h1>
+                    </Col>
+                </Row>
+                <Form>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control type="text" id="nombreRegistro" onChange={(e) => setNombre(e.target.value)} placeholder="Ingresa el nombre" autoComplete="off" />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Precio</Form.Label>
+                                <Form.Control type="number" id="precioRegistro" onChange={(e) => setPrecio(e.target.value)} placeholder="Ingresa el precio" autoComplete="off" />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Cantidad</Form.Label>
+                                <Form.Control type="number" id="cantidadRegistro" onChange={(e) => setCantidad(e.target.value)} placeholder="Ingresa la cantidad" autoComplete="off" />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Imagen</Form.Label>
+                                <Form.Control type="text" id="imagenRegistro" onChange={(e) => setImagen(e.target.value)} placeholder="URL de la imagen" autoComplete="off" />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Form.Group className="mb-3">
+                                <input type="checkbox" id="lineaUnoRegistro" value="Star Wars: The Black Series" onChange={(e) => setLineaFigura(e.target.value)} /> Star Wars: The Black Series<br />
+                                <input className='mb-4' type="checkbox" id="lineaDosRegistro" value="Marvel Legends" onChange={(e) => setLineaFigura(e.target.value)} /> Marvel Legends<br />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className='d-flex justify-content-center'>
+                            <Button type="button" variant="success" id="registroFigura" onClick={() => registrarFigura()}>Registrar</Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </Container>
         </Container>
     )
 }

@@ -157,7 +157,7 @@ const agregarFavoritos = (figura) => {
                 <Route path="/favoritos" element={<Favoritos></Favoritos>} />
                 <Route path="/usuario" element={<Usuario></Usuario>} />
               </>}
-            {!conectado ? <Route path="*" element={<Home />} /> : <Route path="/galeria" element={<Galeria></Galeria>} />}
+            {!conectado ? <Route path="*" element={<Home />} /> : <Route path="/galeria" element={<Galeria />} />}
           </Routes>
         </BrowserRouter>
 
